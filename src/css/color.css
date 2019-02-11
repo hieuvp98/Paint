@@ -1,0 +1,30 @@
+#color00 {
+    -fx-background-color: #000000;
+}
+#color10 {
+    -fx-background-color: rgba(74,60,73,0.99);
+}
+#color20 {
+   -fx-background-color:#f20e07;
+}
+#color30 {
+    -fx-background-color: #ff463f;
+}
+#color40 {
+    -fx-background-color: #ff4e37;
+}
+#color50 {
+    -fx-background-color: #fff102;
+}
+#color60 {
+    -fx-background-color: #1aff5f;
+}
+#color70 {
+    -fx-background-color: #2ba7ff;
+}
+#color80 {
+    -fx-background-color: #1539ff;
+}
+#color90 {
+    -fx-background-color: #f623ff;
+}
