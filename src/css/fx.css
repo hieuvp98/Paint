@@ -1,4 +1,4 @@
-.btn:focused {
+.btn:pressed {
     -fx-border-color: transparent, blue;
     /*-fx-border-width: 1, 1;*/
     /*-fx-border-style: solid;*/
@@ -6,13 +6,9 @@
     /*-fx-border-insets: 1 1 1 1, 0;*/
 }
 
-.brushes:focused {
+.brushes:pressed {
     -fx-border-color: transparent, blue;
     -fx-border-radius: 3, 3;
-}
-
-.btn:pressed {
-    -fx-background-color: transparent;
 }
 
 .btn {
@@ -110,7 +106,7 @@
     -fx-background-position: center;
 }
 #btnFullScreen {
-    -fx-background-image: url("/images/xfullScreen.png");
+    -fx-background-image: url("/images/xfullScreen1.png");
     -fx-background-size: 100% 100%;
     -fx-background-position: center;
 }
@@ -138,7 +134,7 @@
 #size3 {
     -fx-background-image: url("/images/xsize3.png");
 }
-#btn00 {
+#btnPen {
     -fx-background-image: url("/images/pencil.png");
     -fx-background-size: 85% 85%;
     -fx-background-repeat: no-repeat;

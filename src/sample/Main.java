@@ -14,6 +14,7 @@ public class Main extends Application {
         primaryStage.setTitle("Paint");
         Scene scene = (new Scene(root, 1075, 605));
         scene.getStylesheets().add("css/fx.css");
+        scene.getStylesheets().add("css/colour.css");
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(true);
