@@ -155,7 +155,7 @@
     -fx-background-position: center;
 }
 
-#btn01 {
+#btnEraser {
     -fx-background-image: url("/images/eraser2.png");
     -fx-background-size: 85% 85%;
     -fx-background-repeat: no-repeat;
