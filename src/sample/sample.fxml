@@ -458,7 +458,53 @@
                                 </GridPane>
                             </children>
                         </Pane>
-                  <Pane fx:id="chartPane" layoutX="275.0" layoutY="85.0" prefHeight="225.0" prefWidth="455.0" />
+                  <Pane fx:id="chartPane" layoutX="357.0" layoutY="85.0" prefHeight="225.0" prefWidth="342.0" style="-fx-background-color: #97b5e5;">
+                     <children>
+                        <Text layoutX="88.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vẽ đồ thị y = sin(x)" wrappingWidth="170.935546875">
+                           <font>
+                              <Font name="SVN-Comic Sans MS" size="22.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="47.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="start x" wrappingWidth="67.0">
+                           <font>
+                              <Font name="SVN-Comic Sans MS" size="22.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="47.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="end   x" wrappingWidth="67.0">
+                           <font>
+                              <Font name="SVN-Comic Sans MS" size="22.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="47.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="độ chia" wrappingWidth="67.0">
+                           <font>
+                              <Font name="SVN-Comic Sans MS" size="22.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="edtStartX" layoutX="123.0" layoutY="69.0" promptText="-2" />
+                        <TextField fx:id="edtEndX" layoutX="123.0" layoutY="99.0" promptText="2" />
+                        <TextField fx:id="edtDoChia" layoutX="123.0" layoutY="129.0" promptText="40" />
+                        <Button fx:id="btnVe" alignment="CENTER" contentDisplay="CENTER" layoutX="107.0" layoutY="169.0" minHeight="20.0" mnemonicParsing="false" onAction="#clickBtnVe" prefHeight="42.0" prefWidth="56.0" style="-fx-background-radius: 20;" text="Vẽ" textAlignment="CENTER">
+                           <font>
+                              <Font name="SVN-Comic Sans MS" size="21.0" />
+                           </font>
+                        </Button>
+                        <Text layoutX="281.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pi" wrappingWidth="40.0">
+                           <font>
+                              <Font name="SVN-Comic Sans MS" size="22.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="281.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="pi" wrappingWidth="40.0">
+                           <font>
+                              <Font name="SVN-Comic Sans MS" size="22.0" />
+                           </font>
+                        </Text>
+                        <Button fx:id="btnThoi" alignment="CENTER" contentDisplay="CENTER" layoutX="185.0" layoutY="169.0" minHeight="20.0" mnemonicParsing="false" onAction="#clickBtnThoi" prefHeight="42.0" prefWidth="67.0" style="-fx-background-radius: 20;" text="Thôi" textAlignment="CENTER">
+                           <font>
+                              <Font name="SVN-Comic Sans MS" size="21.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
                     </children>
                 </AnchorPane>
             </content>

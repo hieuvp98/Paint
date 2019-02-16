@@ -29,6 +29,15 @@ public class Controller implements Initializable {
     private Color choosingColor;
     private int currentSize = 1;
     private Button choosingButton = null;
+    // ve do thi
+    private Dialog dialog;
+    @FXML
+    public TextField edtStartX;
+    @FXML
+    public TextField edtEndX;
+    @FXML
+    public TextField edtDoChia;
+    // color
     @FXML
     public ColorPicker colorPicker;
     @FXML
@@ -39,6 +48,8 @@ public class Controller implements Initializable {
     private ColorButton colorButton2;
     @FXML
     public Pane brushesPane;
+    @FXML
+    public Pane chartPane;
     @FXML
     public Button btnBrushes;
     @FXML
@@ -70,10 +81,16 @@ public class Controller implements Initializable {
     public Slider sliderZoom;
 
     public void clickBrushes(ActionEvent event) {
-        if (!brushesPane.isVisible())
-            brushesPane.setVisible(true);
-        else {
-            brushesPane.setVisible(false);
+        try {
+            drawPane.getChildren().add(brushesPane);
+        } catch (Exception ignored) {
+        } finally {
+
+            if (!brushesPane.isVisible())
+                brushesPane.setVisible(true);
+            else {
+                brushesPane.setVisible(false);
+            }
         }
     }
 
@@ -154,21 +171,31 @@ public class Controller implements Initializable {
     }
 
     public void veDoThi(ActionEvent event) {
-        TextInputDialog dialog = new TextInputDialog("40");
-        dialog.setTitle("Vẽ Đồ Thị");
-        dialog.setHeaderText("Vẽ đồ thị y = sin(x) từ -2pi đến 2pi");
-        dialog.setContentText("Nhập độ chia:");
-        Optional<String> result = dialog.showAndWait();
-        double value = 40;
-        if (result.isPresent()) {
-            try {
-                value = Double.parseDouble(result.get());
-            } catch (Exception ignored) {
-            }
-        }
+        dialog = new Dialog();
+        dialog.setWidth(250);
+        dialog.setOnCloseRequest(event1 -> {
+            dialog.setResult(true);
+            dialog.close();
+        });
+        DialogPane dialogPane = dialog.getDialogPane();
+        dialogPane.setContent(chartPane);
+        chartPane.setVisible(true);
+        dialog.show();
+    }
+
+    public void clickBtnVe(ActionEvent event) {
         drawPane.getChildren().clear();
+        double value = 40;
+        double startX = -2;
+        double endX = 2;
+        try {
+            value = Double.parseDouble(edtDoChia.getText());
+            startX = Double.parseDouble(edtStartX.getText());
+            endX = Double.parseDouble(edtEndX.getText());
+        } catch (Exception ignored) {
+        }
         Line lineY = new Line(scrollPane.getWidth() / 2, 50, scrollPane.getWidth() / 2, 250);
-        Line lineX = new Line(scrollPane.getWidth() / 8, 150, scrollPane.getWidth() * 0.875, 150);
+        Line lineX = new Line(0, 150, scrollPane.getWidth()*2, 150);
         lineY.setStrokeWidth(2);
         lineX.setStrokeWidth(2);
         Text labelY = new Text("y");
@@ -190,11 +217,11 @@ public class Controller implements Initializable {
         drawPane.getChildren().add(lineY);
         drawPane.getChildren().add(txtDoThi);
         // bat dau ve
-        double beginX = scrollPane.getWidth() / 2 - 2 * Math.PI * 50;
+        double beginX = scrollPane.getWidth() / 2 + startX * Math.PI * 30;
         double beginY = lineX.getStartY();
-        for (double x = -2 * Math.PI; x <= 2 * Math.PI; x += 4 * Math.PI / value) {
+        for (double x = startX * Math.PI; x <= endX * Math.PI; x += ((Math.abs(startX) + endX) * Math.PI / value)) {
             double y = Math.sin(x);
-            double nextX = scrollPane.getWidth() / 2 + x * 50;
+            double nextX = scrollPane.getWidth() / 2 + x * 30;
             double nextY = lineX.getStartY() - y * 50;
             Line path = new Line(beginX, beginY, nextX, nextY);
             drawPane.getChildren().add(path);
@@ -202,6 +229,13 @@ public class Controller implements Initializable {
             beginY = nextY;
         }
         System.out.println("painted");
+        dialog.setResult(Boolean.TRUE);
+        dialog.close();
+    }
+
+    public void clickBtnThoi(ActionEvent event) {
+        dialog.setResult(Boolean.TRUE);
+        dialog.close();
     }
 
     @Override
@@ -238,6 +272,8 @@ public class Controller implements Initializable {
         drawPane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         scrollPane.setContent(drawPane);
         drawPane.getChildren().add(brushesPane);
+        drawPane.getChildren().add(chartPane);
+        chartPane.setVisible(false);
         drawPane.setOnMouseMoved(event -> {
             int x = (int) event.getX();
             int y = (int) event.getY();
