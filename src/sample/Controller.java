@@ -29,6 +29,7 @@ public class Controller implements Initializable {
     private Color choosingColor;
     private int currentSize = 1;
     private Button choosingButton = null;
+    private RadioButton buttonSin, buttonCos;
     // ve do thi
     private Dialog dialog;
     @FXML
@@ -42,7 +43,7 @@ public class Controller implements Initializable {
     public ColorPicker colorPicker;
     @FXML
     public Button color1;
-    private ColorButton colorButton1;
+    private ColorButton colorbutton1;
     @FXML
     public Button color2;
     private ColorButton colorButton2;
@@ -129,7 +130,7 @@ public class Controller implements Initializable {
     public void clickColor1(ActionEvent event) {
         color1.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(4))));
         color2.setBorder(null);
-        choosingColor = colorButton1.getColor();
+        choosingColor = colorbutton1.getColor();
     }
 
     public void clickColor2(ActionEvent event) {
@@ -141,7 +142,7 @@ public class Controller implements Initializable {
     public void pickColor(ActionEvent event) {
         colorButton2.setColor(choosingColor);
         choosingColor = colorPicker.getValue();
-        colorButton1.setColor(choosingColor);
+        colorbutton1.setColor(choosingColor);
     }
 
     public void exitMainPane() {
@@ -180,6 +181,23 @@ public class Controller implements Initializable {
         DialogPane dialogPane = dialog.getDialogPane();
         dialogPane.setContent(chartPane);
         chartPane.setVisible(true);
+        // Group
+        ToggleGroup group = new ToggleGroup();
+
+// Radio 1: sin(x)
+        buttonSin = new RadioButton("sin(x)");
+        buttonSin.setLayoutX(98);
+        buttonSin.setLayoutY(42);
+        buttonSin.setToggleGroup(group);
+        buttonSin.setSelected(true);
+
+// Radio 2: cos(x)
+        buttonCos = new RadioButton("cos(x)");
+        buttonCos.setLayoutX(185);
+        buttonCos.setLayoutY(42);
+        buttonCos.setToggleGroup(group);
+        chartPane.getChildren().add(buttonSin);
+        chartPane.getChildren().add(buttonCos);
         dialog.show();
     }
 
@@ -195,7 +213,7 @@ public class Controller implements Initializable {
         } catch (Exception ignored) {
         }
         Line lineY = new Line(scrollPane.getWidth() / 2, 50, scrollPane.getWidth() / 2, 250);
-        Line lineX = new Line(0, 150, scrollPane.getWidth()*2, 150);
+        Line lineX = new Line(0, 150, scrollPane.getWidth() * 2, 150);
         lineY.setStrokeWidth(2);
         lineX.setStrokeWidth(2);
         Text labelY = new Text("y");
@@ -218,9 +236,19 @@ public class Controller implements Initializable {
         drawPane.getChildren().add(txtDoThi);
         // bat dau ve
         double beginX = scrollPane.getWidth() / 2 + startX * Math.PI * 30;
-        double beginY = lineX.getStartY();
+        double beginY;
+        if (buttonSin.isSelected()) {
+            beginY = lineX.getStartY()-Math.sin(startX*Math.PI)*50;
+        } else {
+            beginY = lineX.getStartY() - Math.cos(startX*Math.PI)*50;
+        }
         for (double x = startX * Math.PI; x <= endX * Math.PI; x += ((Math.abs(startX) + endX) * Math.PI / value)) {
-            double y = Math.sin(x);
+            double y;
+            if (buttonSin.isSelected()) {
+                y = Math.sin(x);
+            } else {
+                y = Math.cos(x);
+            }
             double nextX = scrollPane.getWidth() / 2 + x * 30;
             double nextY = lineX.getStartY() - y * 50;
             Line path = new Line(beginX, beginY, nextX, nextY);
@@ -241,7 +269,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         choosingColor = new Color(0, 0, 0, 1);
-        colorButton1 = new ColorButton(color1, choosingColor);
+        colorbutton1 = new ColorButton(color1, choosingColor);
         colorButton2 = new ColorButton(color2, Color.WHITE);
         color1.setBorder(new Border(new BorderStroke(Color.BLUE, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(4))));
         ColorButton[][] colorButton = new ColorButton[10][3];
@@ -253,7 +281,7 @@ public class Controller implements Initializable {
                 colorButton[j][i].getButton().setOnMousePressed(event -> {
                     colorButton2.setColor(choosingColor);
                     choosingColor = colorButton[finalJ][finalI].getColor();
-                    colorButton1.setColor(choosingColor);
+                    colorbutton1.setColor(choosingColor);
                     colorButton[finalJ][finalI].getButton().setBorder(new Border(new BorderStroke(new Color(0, 0, 1, 1), BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(3))));
                 });
                 colorButton[j][i].getButton().setOnMouseReleased(event -> colorButton[finalJ][finalI].getButton().setBorder(null));

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.shape.*?>
@@ -460,7 +461,7 @@
                         </Pane>
                   <Pane fx:id="chartPane" layoutX="357.0" layoutY="85.0" prefHeight="225.0" prefWidth="342.0" style="-fx-background-color: #97b5e5;">
                      <children>
-                        <Text layoutX="88.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vẽ đồ thị y = sin(x)" wrappingWidth="170.935546875">
+                        <Text layoutX="141.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vẽ đồ thị " wrappingWidth="88.935546875">
                            <font>
                               <Font name="SVN-Comic Sans MS" size="22.0" />
                            </font>
@@ -503,6 +504,7 @@
                               <Font name="SVN-Comic Sans MS" size="21.0" />
                            </font>
                         </Button>
+                        <Group layoutX="144.0" layoutY="42.0" />
                      </children>
                   </Pane>
                     </children>
